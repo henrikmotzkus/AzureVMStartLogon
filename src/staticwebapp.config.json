@@ -2,7 +2,7 @@
     "routes":[
         
         {
-            "route": "/startvm",
+            "route": "/StartVM",
             "allowedRoles": ["authenticated"]
         }
     ]

@@ -10,17 +10,9 @@
 
 <body>
 
-  <script>
-    async function getUserInfo() {
-      const response = await fetch('/.auth/me');
-      const payload = await response.json();
-      const { clientPrincipal } = payload;
-      return clientPrincipal;
-    }
-    getUserInfo();
-  </script>
-  <main>
+   <main>
     <h1>VM Starter and Logon redirect</h1>
+    <p><script src="js/user.js"></script></p>
     <p><a href="/StartVM">VM Panel</a></p>
     <p><a href="/.auth/login/aad">Login</a></p>
     <p><a href="/.auth/logout">Log out</a></p>
