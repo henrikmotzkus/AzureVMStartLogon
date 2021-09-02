@@ -4,8 +4,14 @@ async function getUserInfo() {
     
     const { clientPrincipal } = payload;
     
-    console.log(payload.clientPrincipal.userDetails);
-    return payload.clientPrincipal.userDetails;
+    if (user) {
+        console.log(payload.clientPrincipal.userDetails);
+        return payload.clientPrincipal.userDetails;
+    } else {
+        return null;
+    }
+  
+    
 }
 
 async function renderUserDetails(){
