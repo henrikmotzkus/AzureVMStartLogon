@@ -14,7 +14,7 @@ async function renderUserDetails(){
     let container = document.getElementById('heretheuser');
     container.innerHTML = html;
 
-    let html2 = `btn btn-primary" href="/StartVM">VM Panel</a></p>`;
+    let html2 = `<a class="btn btn-primary" href="/StartVM">VM Panel</a></p>`;
     let container2 = document.getElementById('herethevmpanel');
     container2.innerHTML = html2;
 
