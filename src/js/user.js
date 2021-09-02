@@ -14,5 +14,3 @@ async function renderUserDetails(){
 
 renderUserDetails();
 
-
-
