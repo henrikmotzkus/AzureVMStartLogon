@@ -7,7 +7,7 @@ async function getUserInfo() {
 }
 
 async function renderUserDetails(){
-    let html = <p>${userDetails}</p>;
+    let html = `<p>${userDetails}</p>`;
     let container = document.querySelector('.container');
     container.innerHTML = html;
 }
