@@ -1,9 +1,11 @@
 async function getUserInfo() {
     const response = await fetch('/.auth/me');
     const payload = await response.json();
+    
     const { clientPrincipal } = payload;
-    console.log(json.clientPrincipal.userDetails);
-    return json.clientPrincipal.userDetails;
+    
+    console.log(payload.clientPrincipal.userDetails);
+    return payload.clientPrincipal.userDetails;
 }
 
 async function renderUserDetails(){
@@ -14,4 +16,3 @@ async function renderUserDetails(){
 }
 
 renderUserDetails();
-
