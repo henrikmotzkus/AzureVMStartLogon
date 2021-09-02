@@ -9,6 +9,16 @@
 </head>
 
 <body>
+
+  <script>
+    async function getUserInfo() {
+      const response = await fetch('/.auth/me');
+      const payload = await response.json();
+      const { clientPrincipal } = payload;
+      return clientPrincipal;
+    }
+    getUserInfo();
+  </script>
   <main>
     <h1>VM Starter and Logon redirect</h1>
     <p><a href="/StartVM">VM Panel</a></p>
