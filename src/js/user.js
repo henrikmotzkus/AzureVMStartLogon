@@ -4,7 +4,7 @@ async function getUserInfo() {
     
     const { clientPrincipal } = payload;
     
-    if (user) {
+    if (payload.clientPrincipal.userDetails) {
         console.log(payload.clientPrincipal.userDetails);
         return payload.clientPrincipal.userDetails;
     } else {
