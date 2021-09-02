@@ -9,8 +9,8 @@ async function getUserInfo() {
 }
 
 async function renderUserDetails(){
-    let userdetails = getUserInfo();
-    let html = `<p>${userdetails}</p>`;
+    let user = getUserInfo();
+    let html = `<p> ${user} </p>`;
     let container = document.querySelector('.container');
     container.innerHTML = html;
 }
