@@ -18,16 +18,20 @@ async function renderUserDetails(){
     let user = await getUserInfo();
 
     if (user != null ){
-        let html = `<p> ${user} </p>`;
+        let html = `<p> Hello ${user} !</p>`;
         let container = document.getElementById('heretheuser');
         container.innerHTML = html;
     }
 
-    let html2 = `<a class="btn btn-primary" href="/StartVM">VM Panel</a></p>`;
-    let container2 = document.getElementById('herethevmpanel');
-    container2.innerHTML = html2;
+  
 
     if (user){
+
+
+        let html2 = `<a class="btn btn-primary" href="/StartVM">VM Panel</a></p>`;
+        let container2 = document.getElementById('herethevmpanel');
+        container2.innerHTML = html2;
+
 
         let html3 = `<p><a class="btn btn-primary" href="/.auth/logout">Log out ${user}</a></p>`;
         let container3 = document.getElementById('heretheloginlogout');
