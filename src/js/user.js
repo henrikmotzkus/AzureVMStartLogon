@@ -4,14 +4,13 @@ async function getUserInfo() {
     
     const { clientPrincipal } = payload;
     
-    if (payload.clientPrincipal.userDetails != null) {
+    if (payload != null) {
         console.log(payload.clientPrincipal.userDetails);
         return payload.clientPrincipal.userDetails;
     } else {
         return null;
     }
-  
-    
+      
 }
 
 async function renderUserDetails(){
