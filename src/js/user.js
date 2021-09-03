@@ -28,22 +28,32 @@ async function renderUserDetails(){
     if (user){
 
 
-        let html2 = `<a class="btn btn-primary" href="/StartVM">VM Panel</a></p>`;
-        let container2 = document.getElementById('herethevmpanel');
-        container2.innerHTML = html2;
+        try {
+            let html2 = `<a class="btn btn-primary" href="/StartVM">VM Panel</a></p>`;
+            let container2 = document.getElementById('herethevmpanel');
+            container2.innerHTML = html2;
+        } catch {
 
+        }
 
-        let html3 = `<p><a class="btn btn-primary" href="/.auth/logout">Log out ${user}</a></p>`;
-        let container3 = document.getElementById('heretheloginlogout');
-        container3.innerHTML = html3;
+        try {
+            let html3 = `<p><a class="btn btn-primary" href="/.auth/logout">Log out ${user}</a></p>`;
+            let container3 = document.getElementById('heretheloginlogout');
+            container3.innerHTML = html3;
+        } catch {
 
-        
+        }
+      
 
     } else {
 
-        let html4 = ` <p><a class="btn btn-primary" href="/.auth/login/aad">Login</a></p>`;
-        let container4 = document.getElementById('heretheloginlogout');
-        container4.innerHTML = html4;
+        try{
+            let html4 = ` <p><a class="btn btn-primary" href="/.auth/login/aad">Login</a></p>`;
+            let container4 = document.getElementById('heretheloginlogout');
+            container4.innerHTML = html4;
+        } catch {
+            
+        }
 
        
     }
