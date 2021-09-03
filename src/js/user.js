@@ -14,10 +14,14 @@ async function getUserInfo() {
 }
 
 async function renderUserDetails(){
+
     let user = await getUserInfo();
-    let html = `<p> ${user} </p>`;
-    let container = document.getElementById('heretheuser');
-    container.innerHTML = html;
+
+    if (user != null ){
+        let html = `<p> ${user} </p>`;
+        let container = document.getElementById('heretheuser');
+        container.innerHTML = html;
+    }
 
     let html2 = `<a class="btn btn-primary" href="/StartVM">VM Panel</a></p>`;
     let container2 = document.getElementById('herethevmpanel');
