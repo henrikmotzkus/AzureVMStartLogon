@@ -40,6 +40,8 @@ async function renderUserDetails(){
             let html3 = `<p><a class="btn btn-primary" href="/.auth/logout">Log out ${user}</a></p>`;
             let container3 = document.getElementById('heretheloginlogout');
             container3.innerHTML = html3;
+        } catch {
+            
         }
       
 
