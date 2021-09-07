@@ -1,0 +1,128 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "principalId": {
+            "type": "string",
+            "metadata": {
+                "description": "Service Principal for Function and VM"
+            }
+        },
+        "tenant": {
+            "type": "string",
+            "metadata": {
+                "description": "Tenant"
+            }
+        }
+        
+    },
+    "functions": [],
+    "variables": {
+        "uniquestring":"[uniqueString(subscription().subscriptionId)]",
+        "functionname": "[concat('vmstarter1-', 'function')]",
+        "hostingplanname": "[concat(variables('uniquestring'),'hostingplan')]",
+        "storageaccountname": "[concat(variables('uniquestring'),'sa')]",
+        "storageaccounttype":"Standard_LRS",
+        "identityname": "spforvmstarter",
+        "roleassignmentname": "[guid(variables('identityName'),variables('roleDefinitionId'),resourceGroup().id)]",
+        "roleDefinitionId":"[resourceId('microsoft.authorization/roleDefinitions', '8e3af657-a8ff-443c-a75c-2fe8c4bcb635')]"
+    },
+    "resources": [
+        {
+            "name": "[variables('functionname')]",
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2018-11-01",
+            "location": "[resourceGroup().location]",
+            "kind": "functionapp",
+            "identity": {
+                "type": "UserAssigned",
+                "userAssignedIdentities": {
+                    "[resourceID('Microsoft.ManagedIdentity/userAssignedIdentities/',variables('identityname'))]": {}
+                }
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', variables('hostingplanname'))]",
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('storageaccountname'))]",
+                "[resourceID('Microsoft.ManagedIdentity/userAssignedIdentities/',variables('identityname'))]"
+            ],
+            "properties": {
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingplanname'))]",
+                "siteConfig": {
+                    "appSettings": [
+                        {
+                            "name": "AzureWebJobsDashboard",
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')),'2015-05-01-preview').key1)]"
+                        },
+                        {
+                            "name": "AzureWebJobsStorage",
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')),'2015-05-01-preview').key1)]"
+                        },
+                        {
+                            "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')),'2015-05-01-preview').key1)]"
+                        },
+                        {
+                            "name": "WEBSITE_CONTENTSHARE",
+                            "value": "[toLower(variables('functionname'))]"
+                        },
+                        {
+                            "name": "FUNCTIONS_EXTENSION_VERSION",
+                            "value": "~3"
+                        },
+                        {
+                            "name": "FUNCTIONS_WORKER_RUNTIME",
+                            "value": "powershell"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type":"Microsoft.Web/serverfarms",
+            "apiVersion":"2016-09-01",
+            "name":"[variables('hostingplanname')]",
+            "location":"[resourceGroup().location]",
+            "properties":{
+                "name":"[variables('hostingplanname')]",
+                "computeMode":"Dynamic"
+            },
+            "sku":{
+                "name":"Y1",
+                "tier":"Dynamic",
+                "size":"Y1",
+                "family":"Y",
+                "capacity":0
+            }
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "[variables('storageAccountName')]",
+            "apiVersion": "2019-06-01",
+            "location": "[resourceGroup().location]",
+            "kind": "StorageV2",
+            "sku": {
+                "name": "[variables('storageAccountType')]"
+            }
+        },
+        {
+            "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
+            "name": "[variables('identityname')]",
+            "apiVersion": "2018-11-30",
+            "location": "[resourceGroup().location]"
+        },
+        {
+        "type": "Microsoft.Authorization/roleAssignments",
+        "apiVersion": "2020-04-01-preview",
+        "name": "[variables('roleAssignmentName')]",
+        "properties": {
+            "roleDefinitionId": "[variables('roleDefinitionId')]",
+            "principalId": "[reference(resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('identityname'))).principalId]",
+            "principalType": "ServicePrincipal"
+        },
+        "dependsOn": [
+            "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('identityname'))]"
+        ]
+        }   
+    ],
+    "outputs": {}
+}
