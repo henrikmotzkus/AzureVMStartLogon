@@ -27,12 +27,21 @@ if (-not $accesshash) {
     BadRequest("Provide a valid access hash") 
 }
 
+try {
 
-Connect-AzAccount
+    Connect-AzAccount
+} catch {
+    BadRequest("Could not connect to Azure")
+}
 
 #Select-AzSubscription -SubscriptionID "2abc2ec1-2238-430d-bf52-40cb7dc8b652"
 
-Start-AzVM -Name $vmname -resourcegroupname $resourcegroupname
+try {
+
+    Start-AzVM -Name $vmname -resourcegroupname $resourcegroupname
+} catch {
+    BadRequest("Could not start VM")
+}
 
 #$vmname = "verwaltung"
 #$resourcegroupname = "janice"
