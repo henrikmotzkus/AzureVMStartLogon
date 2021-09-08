@@ -28,8 +28,8 @@ if (-not $accesshash) {
 }
 
 try {
-
-    Connect-AzAccount
+    $Cred = Get-Credential
+    Connect-AzAccount -Credential $Cred
 } catch {
     BadRequest("Could not connect to Azure")
 }
