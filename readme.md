@@ -1,6 +1,31 @@
-# Vanilla JavaScript App
+# VM Starter und Logon Redirector
+
+# tl;dr
+Diese Web-App startet eine beliebige VM in Azure und redirected dann auf die HTML5-Loginscreen (Myrtille) der VM. Der Benutzer kann sich dann per Browser über HTML5 auf der Oberfläche der VM anmelden. 
 
 
-[Azure Static Web Apps](https://docs.microsoft.com/azure/static-web-apps/overview) allows you to easily build JavaScript apps in minutes. Use this repo with the [quickstart](https://docs.microsoft.com/azure/static-web-apps/getting-started?tabs=vanilla-javascript) to build and customize a new static site.
 
-This repo is used as a starter for a _very basic_ HTML web application using no front-end frameworks.
+# Einführung
+Microsoft stellt zwei Services für die Remote-Arbeitsplätze zu Verfügung. Azure Virtual Desktop und Windows 365. Beide Services sind funktionsmäßig sehr umfangreich. Daher für den einen oder anderen Use-Case sicher zu teuer und zu komplex in der Einrichtung. 
+
+Diese Web-App stellt eine sehr rudimentäre Oberfläche bereit, um eine VM, die als Remote-Arbeitsplatz dient, zu starten. Ist die VM gestartet so wird die App den Browser auf die Login-Seite der VM redirecten. Die Login-Seite wird von Myrtille bereitgestellt. Myrtille ist eine Open Source Software, um eine RDP-Session über HTML5 aufzubauen. 
+
+Vorteil ist, dass diese Lösung ein Minimal-Case ist. Es fallen nur minimale Kosten an. Azure Virtual Desktop erfordert einen Domänenkontroller, eine funktionierede User-Synchronisierung und vieles mehr, damit es funktioniert. Also zu teuer und zu komplex. Der Preismodel von Windows 365 ist ein fixer Betrag pro Monat pro User. Ob die Lösung nun genutzt wird oder nicht. 
+
+Diese Lösung kostet (bis auf den belegten Speicher) im Leerlaufbetrieb nichts. Auch wird keine Domäne benötigt.
+
+Diese Lösung ist gedacht für den Einsatz in Non-Profi Organisationen, die die kostenfreien Non-Profi Angebote der Microsoft nutzen können.
+
+# Anwendung
+Besuche die Webseite der App mit einem HTML5 fähigen Browser. Melde Dich mit Deinem Account am Azure AD Tenant an. Klicke auf die VM, zu der Du eine Verbindung herstellen möchtest. 
+
+
+# Deployment
+Zunächst muss die App in einer Azure Subscription deployed werden. 
+
+1. Dazu 
+
+# Einstellungen
+
+
+
