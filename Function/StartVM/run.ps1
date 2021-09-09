@@ -28,8 +28,7 @@ if (-not $accesshash) {
 }
 
 try {
-    $Cred = Get-Credential
-    Connect-AzAccount -Credential $Cred
+    Connect-AzAccount -Identity -tenant "72f988bf-86f1-41af-91ab-2d7cd011db47" -AccountId "e8e1589b-0d5e-4ce0-844b-b09b4a514903"
 } catch {
     BadRequest("Could not connect to Azure")
 }
