@@ -25,7 +25,9 @@
         "storageaccounttype":"Standard_LRS",
         "identityname": "spforvmstarter",
         "roleassignmentname": "[guid(variables('identityName'),variables('roleDefinitionId'),resourceGroup().id)]",
-        "roleDefinitionId":"[resourceId('microsoft.authorization/roleDefinitions', '8e3af657-a8ff-443c-a75c-2fe8c4bcb635')]"
+        "roleDefinitionId":"[resourceId('microsoft.authorization/roleDefinitions', '8e3af657-a8ff-443c-a75c-2fe8c4bcb635')]",
+        "tenantid":"[subscription().tenantId]"
+        
     },
     "resources": [
         {
@@ -72,6 +74,14 @@
                         {
                             "name": "FUNCTIONS_WORKER_RUNTIME",
                             "value": "powershell"
+                        },
+                        {
+                            "name": "tenantid",
+                            "value": "[variables('tenantid')]"
+                        },
+                        {
+                            "name": "AccountId",
+                            "value": "[reference(resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('identityname'))).principalId]"
                         }
                     ]
                 }
