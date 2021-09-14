@@ -33,7 +33,8 @@ Besuche die Webseite der App mit einem HTML5 fähigen Browser. Melde Dich mit De
 5. Füge das Publish Profile für das Deployment der Function App in dein Github Repo ein
 6. Ändere im Github workflow für die Function den namen der Function App
 7. Passe den Source Path im Workflow der Static App an
-8. Committe die geänderten Files in dein Repo
+8. Anpassen der API Url in der index.html in der Javascript App
+9. Committe die geänderten Files in dein Repo
 
 # Einstellungen
 
