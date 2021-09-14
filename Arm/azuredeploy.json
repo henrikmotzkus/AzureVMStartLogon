@@ -2,31 +2,39 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "principalId": {
+        "repositoryUrl": {
             "type": "string",
             "metadata": {
-                "description": "Service Principal for Function and VM"
+                "description": "Url to this repo"
             }
         },
-        "tenant": {
+        "repositoryToken": {
             "type": "string",
             "metadata": {
-                "description": "Tenant"
+                "description": "Token "
+            }
+        },
+        "functionappname": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of the function app"
             }
         }
+       
         
     },
     "functions": [],
     "variables": {
-        "uniquestring":"[uniqueString(subscription().subscriptionId)]",
-        "functionname": "[concat('vmstarter1-', 'function')]",
-        "hostingplanname": "[concat(variables('uniquestring'),'hostingplan')]",
+        "uniquestring":"[uniqueString(subscription().subscriptionId, resourceGroup().name)]",
+        "functionname": "[concat(variables('uniquestring'), 'function')]",
+        "hostingplanname": "[concat(variables('uniquestring'),'-hostingplan')]",
         "storageaccountname": "[concat(variables('uniquestring'),'sa')]",
         "storageaccounttype":"Standard_LRS",
         "identityname": "spforvmstarter",
         "roleassignmentname": "[guid(variables('identityName'),variables('roleDefinitionId'),resourceGroup().id)]",
         "roleDefinitionId":"[resourceId('microsoft.authorization/roleDefinitions', '8e3af657-a8ff-443c-a75c-2fe8c4bcb635')]",
-        "tenantid":"[subscription().tenantId]"
+        "tenantid":"[subscription().tenantId]",
+        "staticwebappname": "[concat(variables('uniquestring'), '-staticwebapp')]"
         
     },
     "resources": [
@@ -121,17 +129,49 @@
             "location": "[resourceGroup().location]"
         },
         {
-        "type": "Microsoft.Authorization/roleAssignments",
-        "apiVersion": "2020-04-01-preview",
-        "name": "[variables('roleAssignmentName')]",
-        "properties": {
-            "roleDefinitionId": "[variables('roleDefinitionId')]",
-            "principalId": "[reference(resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('identityname'))).principalId]",
-            "principalType": "ServicePrincipal"
+            "type": "Microsoft.Authorization/roleAssignments",
+            "apiVersion": "2020-04-01-preview",
+            "name": "[variables('roleAssignmentName')]",
+            "properties": {
+                "roleDefinitionId": "[variables('roleDefinitionId')]",
+                "principalId": "[reference(resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('identityname'))).principalId]",
+                "principalType": "ServicePrincipal"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('identityname'))]"
+            ]
         },
-        "dependsOn": [
-            "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('identityname'))]"
-        ]
+        {
+            "type": "Microsoft.Web/staticSites",
+            "apiVersion": "2021-01-15",
+            "name": "[variables('staticwebappname')]",
+            "location": "West Europe",
+            "sku": {
+                "name": "Standard",
+                "tier": "Standard"
+            },
+            "properties": {
+                "repositoryUrl": "[parameters('repositoryUrl')]",
+                "branch": "main",
+                "stagingEnvironmentPolicy": "Enabled",
+                "allowConfigFileUpdates": true,
+                "repositoryToken": "[parameters('repositoryToken')]"
+            }   
+        },
+        {
+            "type": "Microsoft.Web/staticSites/userProvidedFunctionApps",
+            "apiVersion": "2020-12-01",
+            "name": "[concat(variables('staticwebappname'),'/',variables('functionname'))]",
+            "location": "West Europe",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/staticSites', variables('staticwebappname'))]",
+                "[resourceId('Microsoft.Web/sites', variables('functionname'))]",
+                "[resourceId('Microsoft.Web/serverfarms', variables('hostingplanname'))]"
+            ],
+            "properties": {
+                "functionAppResourceId": "[resourceId('/Microsoft.Web/sites', variables('functionname'), 'StartVM')]",
+                "functionAppRegion": "westeurope"
+            }
         }   
     ],
     "outputs": {}
