@@ -8,9 +8,6 @@ on:
     types: [opened, synchronize, reopened, closed]
     branches:
       - main
-env:
-  AZURE_FUNCTIONAPP_NAME: "vmstarter1-function"    # set this to your application's name
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: './Function'      # set this to the path to your web app project, defaults to the repository root
 
 jobs:
   build_and_deploy_job:
@@ -46,17 +43,3 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WONDERFUL_FLOWER_09D053703 }}
           action: "close"
-
-  build-and-deploy-function:
-    runs-on: windows-latest
-    steps:
-    - name: 'Checkout GitHub Action'
-      uses: actions/checkout@main
-
-    - name: 'Run Azure Functions Action'
-      uses: Azure/functions-action@v1
-      id: fa
-      with:
-        app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
-        package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
-        publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}

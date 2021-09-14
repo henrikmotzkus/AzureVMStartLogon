@@ -1,4 +1,4 @@
-$resourcegroupname = "testdeploy15henrik"
+$resourcegroupname = "testdeploy17henrik"
 $location = "westeurope"
 
 #Connect-AzAccount
@@ -7,11 +7,11 @@ New-AzResourceGroup -Name $resourcegroupname -Location $location
 
 $params = @{
     repositoryUrl="https://github.com/henrikmotzkus/AzureVMStartLogon"
-    repositoryToken = "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"
     functionappname = $resourcegroupname
 }
 
 New-AzResourceGroupDeployment `
 -ResourceGroupName $resourcegroupname `
 -TemplateFile "./azuredeploy.json" `
--TemplateParameterObject $params
+-TemplateParameterObject $params `
+-repositoryToken "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"

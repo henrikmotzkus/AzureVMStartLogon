@@ -39,7 +39,7 @@
     },
     "resources": [
         {
-            "name": "[variables('functionname')]",
+            "name": "[parameters('functionappname')]",
             "type": "Microsoft.Web/sites",
             "apiVersion": "2018-11-01",
             "location": "[resourceGroup().location]",
@@ -161,15 +161,15 @@
         {
             "type": "Microsoft.Web/staticSites/userProvidedFunctionApps",
             "apiVersion": "2020-12-01",
-            "name": "[concat(variables('staticwebappname'),'/',variables('functionname'))]",
+            "name": "[concat(variables('staticwebappname'),'/',parameters('functionappname'))]",
             "location": "West Europe",
             "dependsOn": [
                 "[resourceId('Microsoft.Web/staticSites', variables('staticwebappname'))]",
-                "[resourceId('Microsoft.Web/sites', variables('functionname'))]",
+                "[resourceId('Microsoft.Web/sites', parameters('functionappname'))]",
                 "[resourceId('Microsoft.Web/serverfarms', variables('hostingplanname'))]"
             ],
             "properties": {
-                "functionAppResourceId": "[resourceId('/Microsoft.Web/sites', variables('functionname'), 'StartVM')]",
+                "functionAppResourceId": "[resourceId('/Microsoft.Web/sites', parameters('functionappname'), 'StartVM')]",
                 "functionAppRegion": "westeurope"
             }
         }   

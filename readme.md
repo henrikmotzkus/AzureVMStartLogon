@@ -24,6 +24,16 @@ Besuche die Webseite der App mit einem HTML5 fähigen Browser. Melde Dich mit De
 
 1. Zuerst muss die Infrastruktur für die App deployed werden. Clone das Repo auf Deinen Rechner und führe das Script deploy.ps1 aus. 
 2. Dann muss die Anwendung in die Infrastruktur deployed werden. Das machen wir mit Guthub Actions. Immer wenn Du eine Änderung an der Anwendung machst, dann wird Github Actions die neue Version auf die Infrastruktur deployen.
+ 
+
+1. Clone das Repo in ein eigenes Github Repo
+2. Clone dann dieses Repo auf Deinen Rechner
+3. Erstelle einen Repository Token in GIthub
+4. Führe Deploy.ps1 aus
+5. Füge das Publish Profile für das Deployment der Function App in dein Github Repo ein
+6. Ändere im Github workflow für die Function den namen der Function App
+7. Passe den Source Path im Workflow der Static App an
+8. Committe die geänderten Files in dein Repo
 
 # Einstellungen
 
