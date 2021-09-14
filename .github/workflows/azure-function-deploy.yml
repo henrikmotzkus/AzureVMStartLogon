@@ -9,7 +9,7 @@ on:
     branches:
       - main
 env:
-  AZURE_FUNCTIONAPP_NAME: "testdeploy17henrik"    # set this to your application's name
+  AZURE_FUNCTIONAPP_NAME: "testdeploy18henrik"    # set this to your application's name
   AZURE_FUNCTIONAPP_PACKAGE_PATH: './Function'      # set this to the path to your web app project, defaults to the repository root
 
 jobs:

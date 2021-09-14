@@ -1,4 +1,12 @@
-$resourcegroupname = "testdeploy17henrik"
+[CmdletBinding()]
+param (
+    [Parameter()]
+    [String]
+    $repositoryToken
+)
+
+
+$resourcegroupname = "testdeploy18henrik"
 $location = "westeurope"
 
 #Connect-AzAccount
@@ -14,4 +22,4 @@ New-AzResourceGroupDeployment `
 -ResourceGroupName $resourcegroupname `
 -TemplateFile "./azuredeploy.json" `
 -TemplateParameterObject $params `
--repositoryToken "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"
+-repositoryToken $repositoryToken
