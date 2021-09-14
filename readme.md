@@ -28,7 +28,7 @@ Besuche die Webseite der App mit einem HTML5 fähigen Browser. Melde Dich mit De
 
 1. Clone das Repo in ein eigenes Github Repo
 2. Clone dann dieses Repo auf Deinen Rechner
-3. Erstelle einen Repository Token in GIthub
+3. Erstelle einen Repository Token in Github
 4. Führe Deploy.ps1 aus
 5. Füge das Publish Profile für das Deployment der Function App in dein Github Repo ein
 6. Ändere im Github workflow für die Function den namen der Function App
