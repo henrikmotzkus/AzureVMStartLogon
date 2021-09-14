@@ -21,9 +21,9 @@ Besuche die Webseite der App mit einem HTML5 fähigen Browser. Melde Dich mit De
 
 
 # Deployment
-Zunächst muss die App in einer Azure Subscription deployed werden. 
 
-1. Dazu 
+1. Zuerst muss die Infrastruktur für die App deployed werden. Clone das Repo auf Deinen Rechner und führe das Script deploy.ps1 aus. 
+2. Dann muss die Anwendung in die Infrastruktur deployed werden. Das machen wir mit Guthub Actions. Immer wenn Du eine Änderung an der Anwendung machst, dann wird Github Actions die neue Version auf die Infrastruktur deployen.
 
 # Einstellungen
 

@@ -1,0 +1,28 @@
+name: Azure Static Web Apps CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
+env:
+  AZURE_FUNCTIONAPP_NAME: "testdeploy15henrik"    # set this to your application's name
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: './Function'      # set this to the path to your web app project, defaults to the repository root
+
+jobs:
+  build-and-deploy-function:
+    runs-on: windows-latest
+    steps:
+    - name: 'Checkout GitHub Action'
+      uses: actions/checkout@main
+
+    - name: 'Run Azure Functions Action'
+      uses: Azure/functions-action@v1
+      id: fa
+      with:
+        app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
+        package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+        publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}

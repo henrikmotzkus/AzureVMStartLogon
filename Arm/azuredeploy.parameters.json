@@ -2,11 +2,5 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "principalId": {
-            "value": "d3bf9820-7347-4993-9bd1-1ef758373fb8" 
-        },
-        "tenant": {
-            "value": "72f988bf-86f1-41af-91ab-2d7cd011db47" 
-        }
     }
 }
