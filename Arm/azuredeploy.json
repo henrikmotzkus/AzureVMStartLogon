@@ -151,11 +151,7 @@
                 "tier": "Standard"
             },
             "properties": {
-                "repositoryUrl": "[parameters('repositoryUrl')]",
-                "branch": "main",
-                "stagingEnvironmentPolicy": "Enabled",
-                "allowConfigFileUpdates": true,
-                "repositoryToken": "[parameters('repositoryToken')]"
+               
             }   
         },
         {
@@ -174,5 +170,7 @@
             }
         }   
     ],
-    "outputs": {}
+    "outputs": {
+        
+        }
 }

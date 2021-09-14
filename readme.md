@@ -28,8 +28,8 @@ Besuche die Webseite der App mit einem HTML5 fähigen Browser. Melde Dich mit De
 
 1. Clone das Repo in ein eigenes Github Repo
 2. Clone dann dieses Repo auf Deinen Rechner
-3. Erstelle einen Repository Token in Github
-4. Führe Deploy.ps1 aus
+3. Erstelle einen Repository Token (PAT) in Github. Dieser benötigt rechte auf Repo und Workflows.
+4. Führe Deploy.ps1 aus mit einem Repository Token, Einer Repository Url und einer Function APP Namen als Parameter. Dies deployed eine Function. Eine managed Identity. Einen Storage Account. Und eine Static Web App. Die Static Web App erzeugt automatisch einen workflow 
 5. Füge das Publish Profile für das Deployment der Function App in dein Github Repo ein
 6. Ändere im Github workflow für die Function den namen der Function App
 7. Passe den Source Path im Workflow der Static App an
