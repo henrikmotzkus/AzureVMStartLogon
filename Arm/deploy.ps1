@@ -6,7 +6,7 @@ param (
 )
 
 
-$resourcegroupname = "testdeploy18henrik"
+$resourcegroupname = "testdeploy19henrik"
 $location = "westeurope"
 
 #Connect-AzAccount
