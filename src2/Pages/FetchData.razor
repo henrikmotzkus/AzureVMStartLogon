@@ -1,0 +1,75 @@
+﻿@page "/fetchdata"
+@inject HttpClient Http
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+
+<AuthorizeView>
+    <Authorized>
+        <h1>Hello, @context.User.Identity.Name!</h1>
+        <h2>Connect to your VM</h2>
+        <p></p>
+
+        @if (vms == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nr</th>
+                        <th>Name</th>
+                        <th>Beschreibung</th>
+                        <th>Connect</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var vm in vms)
+                    {
+                        <tr>
+                            <td>@vm.Nr</td>
+                            <td>@vm.Name</td>
+                            <td>@vm.Beschreibung</td>
+                            <td><a class="btn-primary" target="_blank" href="@vm.Url">Connect</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        
+    </Authorized>
+    <NotAuthorized>
+        <h1>Authentication Failure!</h1>
+        <p>You're not signed in.</p>
+    </NotAuthorized>
+</AuthorizeView>
+
+
+
+
+@code {
+    private VM[] vms;
+
+    protected override async Task OnInitializedAsync()
+    {
+        vms = await Http.GetFromJsonAsync<VM[]>("sample-data/vms.json");
+    }
+
+    public class VM
+    {
+        public int Nr { get; set; }
+
+        public string Name { get; set; }
+
+        public string Beschreibung { get; set; }
+
+        public string Url { get; set; }
+    }
+
+
+
+
+}
