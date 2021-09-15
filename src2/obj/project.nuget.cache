@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zg4MPaF6fDVF/SzDsdzK3ZFG7mk2xrwBTpIXWAUfDVW/ryCdD4L4tu2GnTpKXnJowabU888yYfMfmANX9M3XVQ==",
+  "dgSpecHash": "0p17AziUMa8zfyg5/mLIIgzknBlp9bEH+Ce30/wBwsPZmB0Eg3CJ838U41dqr15mFt6uZaJkWbtQGYXxClINQA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\hemotzku\\source\\repos\\VMStarter\\VMStarter\\VMStarter.csproj",
+  "projectFilePath": "C:\\Users\\hemotzku\\Github\\AzureVMStartLogon\\src2\\VMStarter.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hemotzku\\.nuget\\packages\\microsoft.aspnetcore.authorization\\5.0.9\\microsoft.aspnetcore.authorization.5.0.9.nupkg.sha512",
     "C:\\Users\\hemotzku\\.nuget\\packages\\microsoft.aspnetcore.components\\5.0.9\\microsoft.aspnetcore.components.5.0.9.nupkg.sha512",
@@ -33,7 +33,7 @@
     "C:\\Users\\hemotzku\\.nuget\\packages\\microsoft.jsinterop.webassembly\\5.0.9\\microsoft.jsinterop.webassembly.5.0.9.nupkg.sha512",
     "C:\\Users\\hemotzku\\.nuget\\packages\\system.io.pipelines\\5.0.1\\system.io.pipelines.5.0.1.nupkg.sha512",
     "C:\\Users\\hemotzku\\.nuget\\packages\\system.net.http.json\\5.0.0\\system.net.http.json.5.0.0.nupkg.sha512",
-    "C:\\Users\\hemotzku\\.nuget\\packages\\microsoft.netcore.app.runtime.browser-wasm\\5.0.9\\microsoft.netcore.app.runtime.browser-wasm.5.0.9.nupkg.sha512"
+    "C:\\Users\\hemotzku\\.nuget\\packages\\microsoft.netcore.app.runtime.browser-wasm\\5.0.10\\microsoft.netcore.app.runtime.browser-wasm.5.0.10.nupkg.sha512"
   ],
   "logs": []
 }
