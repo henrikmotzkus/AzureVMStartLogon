@@ -1,4 +1,4 @@
-name: Azure Function CI/CD
+name: Azure Function
 
 on:
   push:
