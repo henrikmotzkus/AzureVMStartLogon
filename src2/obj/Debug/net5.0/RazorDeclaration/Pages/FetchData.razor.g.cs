@@ -107,11 +107,30 @@ using Microsoft.AspNetCore.Components.Authorization;
 #nullable restore
 #line 53 "C:\Users\hemotzku\Github\AzureVMStartLogon\src2\Pages\FetchData.razor"
        
+
+
     private VM[] vms;
 
     protected override async Task OnInitializedAsync()
     {
-        vms = await Http.GetFromJsonAsync<VM[]>("sample-data/vms.json");
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            //_authMessage = $"{user.Identity.Name} is authenticated.";
+            //_claims = user.Claims;
+            // _surnameMessage =$"Surname: {user.FindFirst(c => c.Type == ClaimTypes.Surname)?.Value}";
+
+            vms = await Http.GetFromJsonAsync<VM[]>("sample-data/vms.json");
+        }
+        else
+        {
+            //_authMessage = "The user is NOT authenticated.";
+        }
+
+
+
     }
 
     public class VM
