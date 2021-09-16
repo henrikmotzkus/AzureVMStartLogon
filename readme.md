@@ -1,5 +1,7 @@
 # VM Starter und Logon Redirector
 
+!UNDER CONSTRUCTION!
+
 # tl;dr
 Diese Web-App startet eine beliebige VM in Azure und redirected dann auf die HTML5-Loginscreen (Myrtille) der VM. Der Benutzer kann sich dann per Browser über HTML5 auf der Oberfläche der VM anmelden. 
 
