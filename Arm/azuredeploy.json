@@ -96,8 +96,17 @@
             }
         },
         {
-            "type"
-        }
+            "type": "Microsoft.Web/sites/config",
+            "apiVersion": "2021-01-15",
+            "name": "[concat(parameters('functionappname'), 'web')]",
+            "location": "West Europe",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('functionappname'))]"
+            ],
+            "properties": {
+                "powerShellVersion": "~7"
+            }
+        },
         {
             "type":"Microsoft.Web/serverfarms",
             "apiVersion":"2016-09-01",
