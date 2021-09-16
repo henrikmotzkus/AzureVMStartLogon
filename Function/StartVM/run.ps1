@@ -53,8 +53,9 @@ try {
 # Try to start the vm
 try {
 
-    $statuses = (get-azvm -ResourceGroupName $resourcegroupname -Name $vmname -status).Statuses  
-    #$statuses[1].code
+    $vm = get-azvm -ResourceGroupName $resourcegroupname -Name $vmname -status
+    $statuses = $vm.Statuses  
+    $statuses[1].code
 
     if ($statuses[1].code -ne "PowerState/running"){
         Start-AzVM -Name $vmname -resourcegroupname $resourcegroupname
@@ -74,6 +75,7 @@ try {
 
         if ($statuses[1].code -eq "PowerState/running"){
         
+            $vm = get-azvm -ResourceGroupName $resourcegroupname -Name $vmname
             $nicid = $vm.NetworkProfile.NetworkInterfaces[0].Id
             $nic = Get-AzNetworkInterface -ResourceId $nicid
             $pupipid = $nic.IpConfigurations[0].PublicIpAddress.Id
