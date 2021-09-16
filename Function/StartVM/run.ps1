@@ -73,34 +73,32 @@ try {
 # Try to get the url to the VM
 try {
 
-            $vm = get-azvm -ResourceGroupName $resourcegroupname -Name $vmname -status
-            $statuses = $vm.Statuses  
-            $statuses[1].code
+    $vm = get-azvm -ResourceGroupName $resourcegroupname -Name $vmname -status
+    $statuses = $vm.Statuses  
+    $status = $statuses[1].code
 
-            while ($statuses[1].code -ne "PowerState/running") {
-                $vm = get-azvm -ResourceGroupName $resourcegroupname -Name $vmname -status
-                $statuses = $vm.Statuses  
-                $statuses[1].code
-                Start-Sleep -s 5
-            } else {
-                $vm = get-azvm -ResourceGroupName $resourcegroupname -Name $vmname
-                $nicid = $vm.NetworkProfile.NetworkInterfaces[0].Id
-                $nic = Get-AzNetworkInterface -ResourceId $nicid
-                $pupipid = $nic.IpConfigurations[0].PublicIpAddress.Id
-                $res = Get-AzResource -ResourceId $pupipid
-                $pup = Get-AzPublicIpAddress -Name $res.Name -ResourceGroupName $res.ResourceGroupName
-                $fqdn = $pup.DnsSettings.Fqdn
-                $url = "https://$fqdn/Myrtille/?__EVENTTARGET=&__EVENTARGUMENT=&server=&user=$user&passwordHash=$accesshash&program=&connect=Connect%21"
-                Write-Host $url
-                break
-            }
-
-                
-            #if ($statuses[1].code -eq "PowerState/running"){
-            #} else {
-            #    BadRequest("Cannot get the fqdn of the vm. VM not running")
-            #}
-            #
+    while ($status -ne "PowerState/running") {
+        Start-Sleep -s 5
+        $vm = get-azvm -ResourceGroupName $resourcegroupname -Name $vmname -status
+        $statuses = $vm.Statuses  
+        $status = $statuses[1].code
+    }
+    
+    $vm = get-azvm -ResourceGroupName $resourcegroupname -Name $vmname
+    $nicid = $vm.NetworkProfile.NetworkInterfaces[0].Id
+    $nic = Get-AzNetworkInterface -ResourceId $nicid
+    $pupipid = $nic.IpConfigurations[0].PublicIpAddress.Id
+    $res = Get-AzResource -ResourceId $pupipid
+    $pup = Get-AzPublicIpAddress -Name $res.Name -ResourceGroupName $res.ResourceGroupName
+    $fqdn = $pup.DnsSettings.Fqdn
+    $url = "https://$fqdn/Myrtille/?__EVENTTARGET=&__EVENTARGUMENT=&server=&user=$user&passwordHash=$accesshash&program=&connect=Connect%21"
+    Write-Host $url
+    
+    #if ($statuses[1].code -eq "PowerState/running"){
+    #} else {
+    #    BadRequest("Cannot get the fqdn of the vm. VM not running")
+    #}
+    #
 
 } catch {
     BadRequest("Cannot get the fqdn of the vm")
