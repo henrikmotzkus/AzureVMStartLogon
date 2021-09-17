@@ -7,7 +7,7 @@ param($Request, $TriggerMetadata)
 Write-Host "GetVM triggered"
 
 # Get the VMs from a file
-$vms = get-content ./Function/GetVM/vms.json | ConvertFrom-Json
+$vms = get-content vms.json | ConvertFrom-Json
 
 # Associate values to output bindings by calling 'Push-OutputBinding'.
 Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
