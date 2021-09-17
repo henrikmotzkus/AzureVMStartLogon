@@ -8,7 +8,7 @@ Write-Host "GetVM triggered"
 
 # Get the VMs from a file
 
-$body = get-content ./GetVM/vms.json
+$body = get-content -Path "./GetVM/vms.json"
 
 # Associate values to output bindings by calling 'Push-OutputBinding'.
 Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
