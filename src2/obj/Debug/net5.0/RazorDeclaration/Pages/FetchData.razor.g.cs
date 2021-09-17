@@ -76,13 +76,6 @@ using VMStarter;
 #line hidden
 #nullable disable
 #nullable restore
-#line 11 "C:\Users\hemotzku\Github\AzureVMStartLogon\src2\_Imports.razor"
-using VMStarter.Shared;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
 #line 3 "C:\Users\hemotzku\Github\AzureVMStartLogon\src2\Pages\FetchData.razor"
 using System.Security.Claims;
 
@@ -96,6 +89,20 @@ using Microsoft.AspNetCore.Components.Authorization;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 5 "C:\Users\hemotzku\Github\AzureVMStartLogon\src2\Pages\FetchData.razor"
+using VMStarter.Shared;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 6 "C:\Users\hemotzku\Github\AzureVMStartLogon\src2\Pages\FetchData.razor"
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/fetchdata")]
     public partial class FetchData : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -105,16 +112,19 @@ using Microsoft.AspNetCore.Components.Authorization;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 53 "C:\Users\hemotzku\Github\AzureVMStartLogon\src2\Pages\FetchData.razor"
+#line 60 "C:\Users\hemotzku\Github\AzureVMStartLogon\src2\Pages\FetchData.razor"
        
 
-
     private VM[] vms;
+    public string AccessToken;
 
     protected override async Task OnInitializedAsync()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        
         var user = authState.User;
+        
+        
 
         if (user.Identity.IsAuthenticated)
         {
@@ -122,35 +132,33 @@ using Microsoft.AspNetCore.Components.Authorization;
             //_claims = user.Claims;
             // _surnameMessage =$"Surname: {user.FindFirst(c => c.Type == ClaimTypes.Surname)?.Value}";
 
-            vms = await Http.GetFromJsonAsync<VM[]>("sample-data/vms.json");
-        }
-        else
+            //vms = await Http.GetFromJsonAsync<VM[]>("sample-data/vms.json");
+
+            var accessTokenResult = await TokenProvider.RequestAccessToken();
+
+            if (accessTokenResult.TryGetToken(out var token))
+            {
+                AccessToken = token.Value;
+            }
+
+
+            vms = await Http.GetFromJsonAsync<VM[]>("api/GetVM");
+
+
+
+
+        } else
         {
             //_authMessage = "The user is NOT authenticated.";
         }
 
-
-
     }
-
-    public class VM
-    {
-        public int Nr { get; set; }
-
-        public string Name { get; set; }
-
-        public string Beschreibung { get; set; }
-
-        public string Url { get; set; }
-    }
-
-
-
 
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IAccessTokenProvider TokenProvider { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private HttpClient Http { get; set; }
     }

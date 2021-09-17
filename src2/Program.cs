@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +16,7 @@ namespace VMStarter
         public static async Task Main(string[] args)
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
+
             builder.RootComponents.Add<App>("#app");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
@@ -29,6 +31,12 @@ namespace VMStarter
             builder.Services.AddOptions();
             builder.Services.AddAuthorizationCore();
 
+            builder.Services.AddHttpClient("WebAPI",
+                client => client.BaseAddress = new Uri("https://testdeploy19henrik.azurewebsites.net"))
+            .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+
+            builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
+                .CreateClient("WebAPI"));
 
             await builder.Build().RunAsync();
         }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "0p17AziUMa8zfyg5/mLIIgzknBlp9bEH+Ce30/wBwsPZmB0Eg3CJ838U41dqr15mFt6uZaJkWbtQGYXxClINQA==",
+  "dgSpecHash": "H71ZT9JEK5UN+MMbvCrjxT+gfl8xlJwLxHMjqTA4z+2h+gEZlZPmygQ8szOWSf0Az3Fsuor71Of8B0LCoF9UnA==",
   "success": true,
   "projectFilePath": "C:\\Users\\hemotzku\\Github\\AzureVMStartLogon\\src2\\VMStarter.csproj",
   "expectedPackageFiles": [
@@ -25,6 +25,7 @@
     "C:\\Users\\hemotzku\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\5.0.0\\microsoft.extensions.fileproviders.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\hemotzku\\.nuget\\packages\\microsoft.extensions.fileproviders.physical\\5.0.0\\microsoft.extensions.fileproviders.physical.5.0.0.nupkg.sha512",
     "C:\\Users\\hemotzku\\.nuget\\packages\\microsoft.extensions.filesystemglobbing\\5.0.0\\microsoft.extensions.filesystemglobbing.5.0.0.nupkg.sha512",
+    "C:\\Users\\hemotzku\\.nuget\\packages\\microsoft.extensions.http\\5.0.0\\microsoft.extensions.http.5.0.0.nupkg.sha512",
     "C:\\Users\\hemotzku\\.nuget\\packages\\microsoft.extensions.logging\\5.0.0\\microsoft.extensions.logging.5.0.0.nupkg.sha512",
     "C:\\Users\\hemotzku\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\5.0.0\\microsoft.extensions.logging.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\hemotzku\\.nuget\\packages\\microsoft.extensions.options\\5.0.0\\microsoft.extensions.options.5.0.0.nupkg.sha512",

@@ -2,7 +2,12 @@
 @inject HttpClient Http
 @using System.Security.Claims
 @using Microsoft.AspNetCore.Components.Authorization
+@using VMStarter.Shared
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IAccessTokenProvider TokenProvider
+
+
 
 
 <AuthorizeView>
@@ -39,6 +44,8 @@
                 </tbody>
             </table>
         }
+
+        <p>@AccessToken</p>
         
     </Authorized>
     <NotAuthorized>
@@ -52,13 +59,16 @@
 
 @code {
 
-
     private VM[] vms;
+    public string AccessToken;
 
     protected override async Task OnInitializedAsync()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        
         var user = authState.User;
+        
+        
 
         if (user.Identity.IsAuthenticated)
         {
@@ -66,29 +76,26 @@
             //_claims = user.Claims;
             // _surnameMessage =$"Surname: {user.FindFirst(c => c.Type == ClaimTypes.Surname)?.Value}";
 
-            vms = await Http.GetFromJsonAsync<VM[]>("sample-data/vms.json");
-        }
-        else
+            //vms = await Http.GetFromJsonAsync<VM[]>("sample-data/vms.json");
+
+            var accessTokenResult = await TokenProvider.RequestAccessToken();
+
+            if (accessTokenResult.TryGetToken(out var token))
+            {
+                AccessToken = token.Value;
+            }
+
+
+            vms = await Http.GetFromJsonAsync<VM[]>("api/GetVM");
+
+
+
+
+        } else
         {
             //_authMessage = "The user is NOT authenticated.";
         }
 
-
-
     }
-
-    public class VM
-    {
-        public int Nr { get; set; }
-
-        public string Name { get; set; }
-
-        public string Beschreibung { get; set; }
-
-        public string Url { get; set; }
-    }
-
-
-
 
 }

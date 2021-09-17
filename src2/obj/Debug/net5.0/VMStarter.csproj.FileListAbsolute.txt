@@ -1290,3 +1290,6 @@ C:\Users\hemotzku\Github\AzureVMStartLogon\src2\obj\Debug\net5.0\VMStarter.cspro
 C:\Users\hemotzku\Github\AzureVMStartLogon\src2\obj\Debug\net5.0\VMStarter.dll
 C:\Users\hemotzku\Github\AzureVMStartLogon\src2\obj\Debug\net5.0\ref\VMStarter.dll
 C:\Users\hemotzku\Github\AzureVMStartLogon\src2\obj\Debug\net5.0\VMStarter.pdb
+C:\Users\hemotzku\Github\AzureVMStartLogon\src2\bin\Debug\net5.0\wwwroot\_framework\Microsoft.Extensions.Http.dll.gz
+C:\Users\hemotzku\Github\AzureVMStartLogon\src2\bin\Debug\net5.0\wwwroot\_framework\Microsoft.Extensions.Http.dll
+C:\Users\hemotzku\Github\AzureVMStartLogon\src2\obj\Debug\net5.0\build-gz\9ZWrQRGN.gz
