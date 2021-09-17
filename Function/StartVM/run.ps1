@@ -13,7 +13,7 @@ function BadRequest([string]$message){
 }
 
 # Write to the Azure Functions log stream.
-Write-Host "PowerShell HTTP trigger function processed a request."
+Write-Host "StartVM triggered"
 
 # VM name must be provided
 $vmname = $Request.Query.vmname
