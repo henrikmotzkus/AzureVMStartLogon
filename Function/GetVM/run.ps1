@@ -10,7 +10,7 @@ Write-Host "GetVM triggered"
 
 
 
-$body = get-content ./GetVM/vms.json | ConvertTo-Json 
+$body = get-content ./GetVM/vms.json | ConvertFrom-Json 
 
 $bodies = @($body)
 
