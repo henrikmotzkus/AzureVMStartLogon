@@ -6,6 +6,8 @@
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject IAccessTokenProvider TokenProvider
+@inject IHttpClientFactory ClientFactory
+
 
 
 
@@ -32,7 +34,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var vm in vms)
+                    @foreach (VM vm in vms)
                     {
                         <tr>
                             <td>@vm.Nr</td>
@@ -45,7 +47,6 @@
             </table>
         }
 
-        <p>@AccessToken</p>
         
     </Authorized>
     <NotAuthorized>
@@ -67,8 +68,6 @@
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         
         var user = authState.User;
-        
-        
 
         if (user.Identity.IsAuthenticated)
         {
@@ -85,9 +84,10 @@
                 AccessToken = token.Value;
             }
 
+             var client = ClientFactory.CreateClient("WebAPI");
 
-            vms = await Http.GetFromJsonAsync<VM[]>("api/GetVM");
 
+            vms = await client.GetFromJsonAsync<VM[]>("api/GetVM");
 
 
 

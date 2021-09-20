@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using VMStarter.Shared;
 
 namespace VMStarter
 {
@@ -19,7 +20,7 @@ namespace VMStarter
 
             builder.RootComponents.Add<App>("#app");
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
             builder.Services.AddMsalAuthentication(options =>
             {
@@ -31,12 +32,30 @@ namespace VMStarter
             builder.Services.AddOptions();
             builder.Services.AddAuthorizationCore();
 
+            //builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
+            //    .CreateClient("WebAPI"));
+
+
+            builder.Services.AddScoped<CustomAuthorizationMessageHandler>();
+
+            //builder.Services.AddHttpClient("WebAPI",
+            //    client => client.BaseAddress = new Uri("https://testdeploy19henrik.azurewebsites.net"))
+            //.AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+
+
             builder.Services.AddHttpClient("WebAPI",
                 client => client.BaseAddress = new Uri("https://testdeploy19henrik.azurewebsites.net"))
-            .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+            .AddHttpMessageHandler<CustomAuthorizationMessageHandler>();
 
-            builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
-                .CreateClient("WebAPI"));
+            builder.Services.AddScoped(sp => new HttpClient(
+            sp.GetRequiredService<AuthorizationMessageHandler>()
+            .ConfigureHandler(
+                authorizedUrls: new[] { "https://testdeploy19henrik.azurewebsites.net" },
+                scopes: new[] { "api://7b8cd794-86b4-47f9-8a44-56833c056d73/user_impersonation", "api://7b8cd794-86b4-47f9-8a44-56833c056d73/read" }))
+                    {
+                        BaseAddress = new Uri("https://testdeploy19henrik.azurewebsites.net")
+                    });
+
 
             await builder.Build().RunAsync();
         }

@@ -112,7 +112,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 60 "C:\Users\hemotzku\Github\AzureVMStartLogon\src2\Pages\FetchData.razor"
+#line 61 "C:\Users\hemotzku\Github\AzureVMStartLogon\src2\Pages\FetchData.razor"
        
 
     private VM[] vms;
@@ -123,8 +123,6 @@ using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         
         var user = authState.User;
-        
-        
 
         if (user.Identity.IsAuthenticated)
         {
@@ -141,9 +139,10 @@ using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
                 AccessToken = token.Value;
             }
 
+             var client = ClientFactory.CreateClient("WebAPI");
 
-            vms = await Http.GetFromJsonAsync<VM[]>("api/GetVM");
 
+            vms = await client.GetFromJsonAsync<VM[]>("api/GetVM");
 
 
 
@@ -158,6 +157,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IHttpClientFactory ClientFactory { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IAccessTokenProvider TokenProvider { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private HttpClient Http { get; set; }
