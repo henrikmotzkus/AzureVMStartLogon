@@ -8,9 +8,9 @@ Write-Host "GetVM triggered"
 
 # Get the VMs from a file
 
-get-content ./GetVM/vms.json
 
-$body = ConvertTo-Json -InputObject $vms
+
+$body = get-content ./GetVM/vms.json | ConvertTo-Json 
 
 $bodies = @($body)
 
