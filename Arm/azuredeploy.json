@@ -165,22 +165,7 @@
             "properties": {
                
             }   
-        },
-        {
-            "type": "Microsoft.Web/staticSites/userProvidedFunctionApps",
-            "apiVersion": "2020-12-01",
-            "name": "[concat(variables('staticwebappname'),'/',parameters('functionappname'))]",
-            "location": "West Europe",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/staticSites', variables('staticwebappname'))]",
-                "[resourceId('Microsoft.Web/sites', parameters('functionappname'))]",
-                "[resourceId('Microsoft.Web/serverfarms', variables('hostingplanname'))]"
-            ],
-            "properties": {
-                "functionAppResourceId": "[resourceId('/Microsoft.Web/sites', parameters('functionappname'), 'StartVM')]",
-                "functionAppRegion": "westeurope"
-            }
-        }   
+        }
     ],
     "outputs": {
         
